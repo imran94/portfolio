@@ -24,6 +24,26 @@
             --dark-grey: #242424;
 
             --body-padding-hor: 1em;
+
+            --h3-font-size: 35px;
+            --h4-font-size: 28px;
+        }
+
+        @media screen and (min-width: 600px) {
+            :root {
+                --body-padding-hor: 2em;
+
+                --h3-font-size: 43px;
+                --h4-font-size
+            }
+        }
+
+        @media screen and (min-width: 600px) {
+            :root {
+                --body-padding-hor: 20%;
+
+                --h3-font-size: 80px;
+            }
         }
 
         * {
@@ -39,17 +59,27 @@
             font-weight: 400;
             font-style: normal;
             font-size: 15px;
+
         }
 
         body {
-            margin: 2em 0;
+            margin: 2em 0 0;
+        }
+
+        h3,
+        h4 {
+            font-weight: 700;
+            color: white;
         }
 
         h3 {
-            font-weight: 700;
-            font-size: 35px;
-            color: white;
+            font-size: var(--h3-font-size);
         }
+
+        h4 {
+            font-size: var(--h4-font-size);
+        }
+
 
         button,
         .btn {
@@ -100,8 +130,7 @@
             justify-content: center;
             gap: 1em;
 
-            /* position: absolute;
-            width: 100%; */
+            margin: 0 var(--body-padding-hor);
         }
 
         .nav-list {
@@ -129,7 +158,7 @@
         }
 
         .nav-icon:hover,
-        .nav-icon:hover {
+        .nav-icon:active {
             filter: invert(75%);
         }
 
@@ -138,7 +167,8 @@
         }
 
         main,
-        .profile {
+        #profile,
+        #profile-info {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -149,7 +179,8 @@
             gap: 5em;
         }
 
-        .profile {
+        #profile-info {
+
             text-align: center;
         }
 
@@ -157,7 +188,7 @@
             border-bottom: 4px solid var(--green-blue);
         }
 
-        .profile-photo {
+        #profile-photo {
             width: 15em;
             /* position: relative;
             bottom: 5em;
@@ -218,7 +249,7 @@
 
         .project-preview {
             max-width: 100%;
-            max-height: 300px;
+            height: 260px;
 
             transition: transform .3s;
         }
@@ -230,7 +261,7 @@
 
         .project-name {
             font-weight: 700;
-            font-size: 28px;
+            font-size: var(--h4-font-size);
 
             margin: 0.5em 0;
 
@@ -254,12 +285,15 @@
 
         footer,
         #contact,
-        #contact-form {
+        #contact-form,
+        #contact-label {
             display: flex;
             flex-direction: column;
         }
 
         footer {
+            align-items: center;
+
             margin: 0;
             padding: 0 var(--body-padding-hor);
             background-color: var(--dark-grey);
@@ -293,6 +327,96 @@
         footer .nav-container {
             border-top: 2px solid silver;
             padding: 2em 0;
+            width: 100%;
+        }
+
+        @media screen and (min-width: 600px) {
+
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            #profile {
+                flex-direction: row-reverse;
+                justify-content: space-between;
+
+                /* justify-items: start; */
+            }
+
+            #profile-info {
+                align-items: flex-start;
+                text-align: left;
+                max-width: 50%;
+            }
+
+            #profile * {
+                grid-column: 1;
+            }
+
+            #profile-photo {
+                grid-column: 2;
+                grid-row-start: 1;
+                grid-row-end: -1;
+            }
+
+            #skills {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .skill-img {
+                max-height: 130px;
+            }
+
+            #projects-body {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            #contact {
+                max-width: 50%;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            #profile-info {
+                max-width: 70%;
+            }
+
+            #skills {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            #contact {
+                padding: 5em 0;
+
+                width: 100%;
+                max-width: 100%;
+
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
+            #contact>* {
+                max-width: 40%;
+            }
+
+            #contact-label {
+                text-align: left;
+                gap: 2em;
+                /* justify-self: flex-start; */
+            }
+
+            #contact-heading {
+                margin: 0;
+            }
+
+            .project-preview {
+                width: 100%;
+                height: fit-content;
+            }
         }
     </style>
 </head>
@@ -310,36 +434,58 @@
         </nav>
     </header>
     <main>
-        <div class="profile">
-            <img class="profile-photo" src="{{ url('assets/me.jpg') }}" />
-            <h3 class="profile-heading">Nice to meet you!<br />I'm <span class="fancy-underline">Imran Raja</span>.</h3>
-            <a href="#" class="btn">contact me</a>
+        <div id="profile">
+            <img id="profile-photo" src="{{ url('assets/me.jpg') }}" />
+            <div id="profile-info">
+                <h3 class="profile-heading">Nice to meet you!<br />I'm <span class="fancy-underline">Imran Raja</span>.
+                </h3>
+                <p>
+                    Based in Pakistan, I'm a full-stack web developer and mobile app developer passionate about building
+                    applications that users love.
+                </p>
+                <p>
+                    I always seek perfection in what I make, and continually strive to be at the cutting-edge in the
+                    field of
+                    app development.
+                    Believing in not just doing the bare minimum work required of me by a client for a project, but
+                    creating
+                    something
+                    that provides a truly pleasant experience for the end user.
+                </p>
+                <p>
+                    I believe communication is key to a successful app development process. To facilitate this, I make
+                    myself perpetually available to clients during development, via their preferred choice of
+                    communication, be it text chat
+                    or video call. With my development experience and
+                    fluency in English, I am able to accurately gauge the requirements of the project.
+                </p>
+                <a href="#contact" class="btn">contact me</a>
+            </div>
         </div>
-
 
         <div id="skills">
             <div class="skill">
                 <img class="skill-img" src="{{ url('assets/html-css-js.png') }}" />
-                <h3 class="skill-name">HTML/CSS/Javascript</h3>
+                <h4 class="skill-name">HTML/CSS/Javascript</h4>
                 <div class="skill-duration">4 Years Experience</div>
             </div>
 
             <div class="skill">
                 <img class="skill-img" src="{{ url('assets/vue.svg') }}" />
-                <h3 class="skill-name">Vue.js</h3>
-                <div class="skill-duration">3 Years Experience</div>
+                <h4 class="skill-name">Vue.js</h3>
+                    <div class="skill-duration">3 Years Experience</div>
             </div>
 
             <div class="skill">
                 <img class="skill-img" src="{{ url('assets/laravel.svg') }}" />
-                <h3 class="skill-name">Laravel</h3>
-                <div class="skill-duration">3 Years Experience</div>
+                <h4 class="skill-name">Laravel</h3>
+                    <div class="skill-duration">3 Years Experience</div>
             </div>
 
             <div class="skill">
                 <img class="skill-img" src="{{ url('assets/spring.svg') }}" />
-                <h3 class="skill-name">Java Spring Boot</h3>
-                <div class="skill-duration">2 Years Experience</div>
+                <h4 class="skill-name">Java Spring Boot</h3>
+                    <div class="skill-duration">2 Years Experience</div>
             </div>
 
             <div class="skill">
@@ -349,15 +495,15 @@
 
             <div class="skill">
                 <img class="skill-img android-img" class="skill-img" src="{{ url('assets/android.png') }}" />
-                <h3 class="skill-name">Android</h3>
-                <div class="skill-duration">2 Year Experience</div>
+                <h4 class="skill-name">Android</h4>
+                <div class="skill-duration">2 Years Experience</div>
             </div>
         </div>
 
         <div id="projects-section">
             <div id="projects-header">
                 <h3 id="projects-heading">Projects</h3>
-                <a href="#" class="btn">Contact Me</a>
+                <a href="#contact" class="btn">Contact Me</a>
             </div>
 
             <div id="projects-body">
@@ -492,7 +638,8 @@
                 <div id="contact-text">I would love to hear about your project and how I could help. Please fill in the
                     form, and I'll get back to you as soon as possible.</div>
             </div>
-            <form id="contact-form">
+            <form id="contact-form" method="POST" action="{{ route('submitContactForm') }}">
+                @csrf
                 <input class="input" id="name" name="name" placeholder="NAME" required />
                 <input class="input" type="email" id="email" name="email" placeholder="EMAIL" required />
                 <textarea class="input" id="message" name="message" rows="5" placeholder="MESSAGE"></textarea>
@@ -516,3 +663,39 @@
 </body>
 
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const status = '{{ session('status') }}';
+    if (status) {
+        Swal.fire({
+            title: status,
+            toast: true,
+            timer: 3000,
+            position: 'top',
+            // icon: 'success'
+        });
+    }
+
+    const startAnimation = (entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                if (!entry.target.classList.contains("animate")) {
+                    entry.target.classList.add("animate");
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(startAnimation);
+    const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0
+    };
+
+    document
+        .querySelectorAll("main *")
+        .forEach((el) => observer.observe(el, options));
+</script>
