@@ -19,6 +19,8 @@
         :root {
             --almost-black: #151515;
             --green-blue: #4CE19D;
+            --dark-green-blue: #46a178;
+
             --silver: #dedede;
             --pale-grey: #ECECEC;
             --dark-grey: #242424;
@@ -27,6 +29,14 @@
 
             --h3-font-size: 35px;
             --h4-font-size: 28px;
+
+            --project-preview-height: 250px;
+
+            /* Animation units */
+            --slide-distance-width: 2.5vw;
+            --slide-distance-height: 2.5vh;
+            --anim-duration: 1.5s;
+            --anim-duration-secondary: 2s;
         }
 
         @media screen and (min-width: 600px) {
@@ -34,15 +44,78 @@
                 --body-padding-hor: 2em;
 
                 --h3-font-size: 43px;
-                --h4-font-size
+
+
             }
         }
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 1200px) {
             :root {
                 --body-padding-hor: 20%;
 
                 --h3-font-size: 80px;
+                --project-preview-height: 400px;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideLeft {
+            from {
+                translate: var(--slide-distance-width) 0;
+            }
+
+            to {
+                translate: 0 0;
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                translate: calc(var(--slide-distance-width) * -1) 0;
+            }
+
+            to {
+                translate: 0 0;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(var(--slide-distance-height));
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(calc(var(--slide-distance-height) * -1));
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleOut {
+            from {
+                scale: 95%;
+            }
+
+            to {
+                scale: 100%;
             }
         }
 
@@ -94,6 +167,14 @@
             font-size: 17px;
 
             cursor: pointer;
+        }
+
+        button:hover,
+        button:active,
+        .btn:hover,
+        .btn:active {
+            color: silver;
+            border-color: var(--dark-green-blue);
         }
 
         .input {
@@ -175,12 +256,15 @@
             justify-content: center;
         }
 
+        #profile {
+            gap: 1em;
+        }
+
         main {
             gap: 5em;
         }
 
         #profile-info {
-
             text-align: center;
         }
 
@@ -209,12 +293,17 @@
 
         .skill {
             text-align: center;
+
+            display: grid;
+            grid-template-rows: 100px 1fr 1fr;
+            align-items: center;
+            justify-items: center;
+
+            gap: 1em;
         }
 
         .skill-img {
-            width: 100%;
-            max-height: 200px;
-            /* max-width: 200px; */
+            max-height: 100%;
         }
 
         .android-img {
@@ -223,6 +312,10 @@
 
         .skill-name {
             margin: .5em 0;
+        }
+
+        .skill-duration {
+            align-self: self-start;
         }
 
         #projects-header {
@@ -242,9 +335,13 @@
         }
 
         .project {
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
+            display: grid;
+            grid-template-rows: var(--project-preview-height) 1fr auto auto;
+            align-items: start;
+
+            /* display: flex;
+            flex-direction: column; */
+            gap: 0.5em;
         }
 
         .project-preview {
@@ -330,6 +427,13 @@
             width: 100%;
         }
 
+        @media screen and (max-width: 600px) {
+            main *.animate {
+                animation-name: fadeIn, slideUp;
+                animation-duration: var(--anim-duration);
+            }
+        }
+
         @media screen and (min-width: 600px) {
 
             .nav-container {
@@ -354,15 +458,32 @@
                 grid-column: 1;
             }
 
+            #profile-info *.animate {
+                animation-name: fadeIn, slideRight;
+                animation-duration: var(--anim-duration);
+            }
+
+            #skills *.animate,
+            #projects-section *.animate {
+                animation-name: fadeIn, slideUp;
+                animation-duration: var(--anim-duration);
+            }
+
             #profile-photo {
                 grid-column: 2;
                 grid-row-start: 1;
                 grid-row-end: -1;
             }
 
+            #profile-photo.animate {
+                animation-duration: var(--anim-duration);
+                animation-name: fadeIn, slideLeft;
+            }
+
             #skills {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
+
             }
 
             .skill-img {
@@ -382,6 +503,11 @@
         @media screen and (min-width: 1200px) {
             #profile-info {
                 max-width: 70%;
+            }
+
+            #profile-photo {
+                /* width: fit-content;
+                max-width: 30%; */
             }
 
             #skills {
@@ -447,7 +573,7 @@
                     I always seek perfection in what I make, and continually strive to be at the cutting-edge in the
                     field of
                     app development.
-                    Believing in not just doing the bare minimum work required of me by a client for a project, but
+                    Believing in not just doing the bare minimum work required for a project, but
                     creating
                     something
                     that provides a truly pleasant experience for the end user.
@@ -457,7 +583,7 @@
                     myself perpetually available to clients during development, via their preferred choice of
                     communication, be it text chat
                     or video call. With my development experience and
-                    fluency in English, I am able to accurately gauge the requirements of the project.
+                    fluency in English, I'm able to accurately gauge the requirements of the project.
                 </p>
                 <a href="#contact" class="btn">contact me</a>
             </div>
@@ -484,7 +610,7 @@
 
             <div class="skill">
                 <img class="skill-img" src="{{ url('assets/spring.svg') }}" />
-                <h4 class="skill-name">Java Spring Boot</h3>
+                <h4 class="skill-name">Spring Boot</h3>
                     <div class="skill-duration">2 Years Experience</div>
             </div>
 
@@ -513,7 +639,7 @@
                     </a>
                     <a href="https://audiophile.imranraja.net/public/" class="project-name" target="_blank"
                         rel="noopener noreferrer">AUDIOPHILE E-COMMERCE
-                        WEBSITE</a>
+                        WEBSITE (DEMO)</a>
                     <div class="project-tools">
                         <div class="project-tool">HTML</div>
                         <div class="project-tool">CSS</div>
@@ -534,8 +660,8 @@
                         <img class="project-preview" src="{{ url('assets/previews/designo.jpg') }}" />
                     </a>
                     <a href="https://imran94.github.io/designo/" class="project-name" target="_blank"
-                        rel="noopener noreferrer">DESIGNO DEVELOPMENT AGENCY
-                        WEBSITE</a>
+                        rel="noopener noreferrer">DESIGNO
+                        WEBSITE (DEMO)</a>
                     <div class="project-tools">
                         <div class="project-tool">HTML</div>
                         <div class="project-tool">CSS</div>
@@ -556,7 +682,7 @@
                     </a>
                     <a href="https://imran94.github.io/space-tourism-website/" class="project-name" target="_blank"
                         rel="noopener noreferrer">SPACE TOURISM
-                        WEBSITE</a>
+                        WEBSITE (DEMO)</a>
                     <div class="project-tools">
                         <div class="project-tool">HTML</div>
                         <div class="project-tool">CSS</div>
@@ -576,7 +702,7 @@
                         <img class="project-preview" src="{{ url('assets/previews/feedback.jpg') }}" />
                     </a>
                     <a href="https://feedback.imranraja.net" class="project-name" target="_blank"
-                        rel="noopener noreferrer">FEEDBACK BOARD WEB APP</a>
+                        rel="noopener noreferrer">FEEDBACK BOARD WEB APP (DEMO)</a>
                     <div class="project-tools">
                         <div class="project-tool">HTML</div>
                         <div class="project-tool">CSS</div>
@@ -671,8 +797,9 @@
         Swal.fire({
             title: status,
             toast: true,
-            timer: 3000,
+            timer: 5000,
             position: 'top',
+            showConfirmButton: false
             // icon: 'success'
         });
     }
