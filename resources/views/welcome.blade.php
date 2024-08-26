@@ -204,6 +204,12 @@
             color: white;
         }
 
+        a.text-link:hover,
+        a.text-link:active {
+            text-decoration: underline;
+            text-decoration-color: var(--green-blue);
+        }
+
         .nav-container {
             display: flex;
             flex-direction: column;
@@ -566,11 +572,12 @@
                 <h3 class="profile-heading">Nice to meet you!<br />I'm <span class="fancy-underline">Imran Raja</span>.
                 </h3>
                 <p>
-                    Based in Pakistan, I'm a full-stack web developer and mobile app developer passionate about building
+                    Based in Pakistan, I'm a full-stack web developer and mobile app developer with several years of
+                    experience in the enterprise field, and am passionate about building
                     applications that users love.
                 </p>
                 <p>
-                    I always seek perfection in what I make, and continually strive to be at the cutting-edge in the
+                    I always seek perfection in whatever I make, and continually strive to be at the cutting-edge in the
                     field of
                     app development.
                     Believing in not just doing the bare minimum work required for a project, but
@@ -580,10 +587,12 @@
                 </p>
                 <p>
                     I believe communication is key to a successful app development process. To facilitate this, I make
-                    myself perpetually available to clients during development, via their preferred choice of
+                    myself perpetually available to clients for the duration of development, via their preferred choice
+                    of
                     communication, be it text chat
-                    or video call. With my development experience and
-                    fluency in English, I'm able to accurately gauge the requirements of the project.
+                    or video call. With my experience in development and
+                    fluency in English, I'm easily able to gauge the requirements of a project, and deliver the desired
+                    outcome.
                 </p>
                 <a href="#contact" class="btn">contact me</a>
             </div>
@@ -761,8 +770,11 @@
         <section id="contact">
             <div id="contact-label">
                 <h3 id="contact-heading">Contact</h3>
-                <div id="contact-text">I would love to hear about your project and how I could help. Please fill in the
-                    form, and I'll get back to you as soon as possible.</div>
+                <div id="contact-text">
+                    I would love to hear about your project and how I could help. Please fill in the
+                    form, or contact me directly at <a href="mailto: iraja094@gmail.com">iraja094@gmail.com</a>, and
+                    I'll get back to you as soon as possible.
+                </div>
             </div>
             <form id="contact-form" method="POST" action="{{ route('submitContactForm') }}">
                 @csrf
